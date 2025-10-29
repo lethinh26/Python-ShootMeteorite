@@ -60,19 +60,37 @@ class ShootMeteorite:
     def run_game(self):
         while True:
 
-            # move ship
             moveShipEvent(self)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                # if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.fire_bullet()
 
-            self.screen.fill((38, 13, 120))
+            self.screen.fill(self.settings.BG_COLOR)
+
             self.ship.blitme()
+
+            self.bullets.update()
+            for b in self.bullets.sprites():
+                b.draw_bullet()
+
+            self.update_meteors()
+            self.draw_meteors()
+
+
+            self.create_meteor()
+
             self.screen.blit(self.score, (0,0))
+
             self.clock.tick(60)
             pygame.display.flip()
+
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
 
 if __name__ == "__main__":
     game = ShootMeteorite()

@@ -15,6 +15,7 @@ class Settings:
         self.ENEMY_SIZE = 0
         self.ENEMY_SPEED = 10
         self.ENEMY_SPAWN_RATE = 0.5
+        self.MAX_ENEMIES = 5
 
         self.BULLET_WIDTH = 5
         self.BULLET_HEIGHT = 10
