@@ -5,7 +5,7 @@ class Ship:
         self.screen_rect = game.screen.get_rect()
         self.speed = game.settings.PLAYER_SPEED
 
-        self.image = pygame.image.load("assests/spaceship.png")
+        self.image = pygame.image.load(game.settings.PLAYER_IMAGE)
         self.rect = self.image.get_rect()
         # self.rect.midbottom = self.screen_rect.midbottom
         self.rect.x = game.settings.WIDTH / 2
