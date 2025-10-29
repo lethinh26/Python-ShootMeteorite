@@ -27,3 +27,4 @@ class Ship:
         if direction == 'up':
             if self.rect.top > 0:
                 self.rect.y -= self.speed
+
