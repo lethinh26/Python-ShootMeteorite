@@ -97,6 +97,7 @@ class ShootMeteorite:
                 
 
 
+
 if __name__ == "__main__":
     game = ShootMeteorite()
     game.run_game()
