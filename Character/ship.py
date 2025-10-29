@@ -3,7 +3,7 @@ class Ship:
     def __init__(self, game):
         self.screen = game.screen
         self.screen_rect = game.screen.get_rect()
-        self.speed = 10
+        self.speed = game.settings.PLAYER_SPEED
 
         self.image = pygame.image.load("assests/spaceship.png")
         self.rect = self.image.get_rect()
