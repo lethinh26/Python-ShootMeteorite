@@ -1,3 +1,6 @@
+import pygame
+
+
 class Settings:
     def __init__(self):
         self.WIDTH = 800
@@ -19,6 +22,9 @@ class Settings:
 
         self.BG_COLOR = (38, 13, 120)
         self.TEXT_COLOR = 0
-
-
-        
+        self.SCORE = 0
+        self.FONT = pygame.font.SysFont('Arial', 30)
+    
+    def updateScore(self, number):
+        self.SCORE += number
+        self.SCORE += number
