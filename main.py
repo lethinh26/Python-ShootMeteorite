@@ -10,24 +10,40 @@ class ShootMeteorite:
         
         self.screen = pygame.display.set_mode((int(self.settings.WIDTH), int(self.settings.HEIGHT)))
         pygame.display.set_caption("Bắn thiên thạch")
-        
+
         self.ship = Ship(self)
         # self.ship = pygame.display.set_mode((int(self.settings.WIDTH), int(self.settings.HEIGHT)))
-        
+        self.clock = pygame.time.Clock()
 
 
         # pygame.display.is_fullscreen(True)
 
     def run_game(self):
         while True:
+            pressed = pygame.key.get_pressed()
+            if pressed[pygame.K_LEFT]:
+                self.ship.update('left')
+            if pressed[pygame.K_RIGHT]:
+                self.ship.update('right')
+            if pressed[pygame.K_UP]:
+                self.ship.update('up')
+            if pressed[pygame.K_DOWN]:
+                self.ship.update('down')
+
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                # if event.type == pygame.KEYDOWN:
 
-                self.screen.fill((38, 13, 120))
-                self.ship.blitme()
+
+
+            self.screen.fill((38, 13, 120))
+            self.ship.blitme()
+            self.clock.tick(60)
+            pygame.display.flip()
+
                 
-                pygame.display.flip()
 
 
 if __name__ == "__main__":
