@@ -24,7 +24,6 @@ class Settings:
         self.TEXT_COLOR = 0
         self.SCORE = 0
         self.FONT = pygame.font.SysFont('Arial', 30)
-    
+
     def updateScore(self, number):
-        self.SCORE += number
         self.SCORE += number

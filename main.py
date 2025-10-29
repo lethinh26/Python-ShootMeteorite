@@ -3,6 +3,8 @@ import pygame
 from Character import bullet
 from Settings import config
 from Character.ship import Ship
+from event.shipEvent import moveShipEvent
+
 from Character.bullet import Bullet
 from Character.meteor import Meteor
 import time
@@ -14,15 +16,15 @@ class ShootMeteorite:
         
         self.screen = pygame.display.set_mode((int(self.settings.WIDTH), int(self.settings.HEIGHT)))
         pygame.display.set_caption("Bắn thiên thạch")
-        
+
         self.ship = Ship(self)
 
         self.bullets = pygame.sprite.Group()
         self.meteors = pygame.sprite.Group()
 
         # self.ship = pygame.display.set_mode((int(self.settings.WIDTH), int(self.settings.HEIGHT)))
-        
-
+        self.clock = pygame.time.Clock()
+        self.score = self.settings.FONT.render(f'score: {self.settings.SCORE}',True,(255,255,255))
 
         # pygame.display.is_fullscreen(True)
         self.clock = pygame.time.Clock()
@@ -57,48 +59,20 @@ class ShootMeteorite:
     
     def run_game(self):
         while True:
-            pressed = pygame.key.get_pressed()
-            if pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
-                self.ship.update('left')
-            if pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
-                self.ship.update('right')
-            if pressed[pygame.K_w] or pressed[pygame.K_UP]:
-                self.ship.update('up')
-            if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
-                self.ship.update('down')
+
+            # move ship
+            moveShipEvent(self)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        self.fire_bullet()
+                # if event.type == pygame.KEYDOWN:
 
-            self.screen.fill(game.settings.BG_COLOR)
+            self.screen.fill((38, 13, 120))
             self.ship.blitme()
-
-            self.bullets.update()
-            for b in self.bullets.sprites():
-                b.draw_bullet()
-
-            self.update_meteors()
-            self.draw_meteors()
             self.screen.blit(self.score, (0,0))
-
             self.clock.tick(60)
             pygame.display.flip()
-
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 10:
-                    self.bullets.remove(bullet)
-
-                self.create_meteor()
-                
-                
-
-
-
-
 
 if __name__ == "__main__":
     game = ShootMeteorite()
