@@ -2,6 +2,8 @@ import sys
 import pygame
 from Settings import config
 from Character.ship import Ship
+from event.shipEvent import moveShipEvent
+
 
 class ShootMeteorite:
     def __init__(self):
@@ -20,32 +22,20 @@ class ShootMeteorite:
 
     def run_game(self):
         while True:
-            pressed = pygame.key.get_pressed()
-            if pressed[pygame.K_a] or pressed[pygame.K_LEFT]:
-                self.ship.update('left')
-            if pressed[pygame.K_d] or pressed[pygame.K_RIGHT]:
-                self.ship.update('right')
-            if pressed[pygame.K_w] or pressed[pygame.K_UP]:
-                self.ship.update('up')
-            if pressed[pygame.K_s] or pressed[pygame.K_DOWN]:
-                self.ship.update('down')
 
+            # move ship
+            moveShipEvent(self)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
                 # if event.type == pygame.KEYDOWN:
 
-
-
             self.screen.fill((38, 13, 120))
             self.ship.blitme()
             self.screen.blit(self.score, (0,0))
             self.clock.tick(60)
             pygame.display.flip()
-
-                
-
 
 if __name__ == "__main__":
     game = ShootMeteorite()
